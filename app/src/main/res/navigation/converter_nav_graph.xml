@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/converter_nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/converterFragment">
+
+    <fragment
+        android:id="@+id/converterFragment"
+        android:name="com.vladus177.currencycheck.ui.fragment.CurrencyConverterFragment"
+        android:label="Currency Converter">
+    </fragment>
 
 </navigation>

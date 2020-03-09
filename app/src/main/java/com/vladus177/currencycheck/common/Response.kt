@@ -1,4 +1,7 @@
 package com.vladus177.currencycheck.common
 
-class Response {
-}
+data class Response<T>(
+    val data: T,
+    val status: Boolean,
+    val message: String
+)

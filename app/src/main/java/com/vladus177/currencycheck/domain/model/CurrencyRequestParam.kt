@@ -1,4 +1,5 @@
 package com.vladus177.currencycheck.domain.model
 
-class CurrencyRequestParam {
-}
+data class CurrencyRequestParam(
+    val currencyCode: String
+)

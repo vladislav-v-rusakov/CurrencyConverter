@@ -1,4 +1,5 @@
 package com.vladus177.currencycheck.data.remote.model
 
-class CurrencyResponseEntry {
-}
+data class CurrencyResponseEntry(
+    val baseCurrency: String?, val rates: RatesEntry?
+)
