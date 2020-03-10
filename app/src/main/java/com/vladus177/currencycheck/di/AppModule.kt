@@ -7,7 +7,7 @@ import com.vladus177.currencycheck.data.local.source.CurrencyLocalDataSource
 import com.vladus177.currencycheck.data.remote.net.CurrencyApi
 import com.vladus177.currencycheck.data.remote.source.CurrencyRemoteDataSource
 import com.vladus177.currencycheck.data.repository.CurrencyRepository
-import com.vladus177.currencycheck.domain.GetUsdUseCase
+import com.vladus177.currencycheck.domain.GetCurrencyUseCase
 import com.vladus177.currencycheck.presentation.CurrencyConverterViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -62,7 +62,7 @@ val appModule = module {
 
 
     // UseCases
-    factory { GetUsdUseCase(get()) }
+    factory { GetCurrencyUseCase(get()) }
 
 
 }

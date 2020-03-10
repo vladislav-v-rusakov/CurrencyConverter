@@ -6,7 +6,7 @@ import com.vladus177.currencycheck.domain.model.CurrencyRequestParam
 import com.vladus177.currencycheck.domain.model.CurrencyResponseModel
 import kotlinx.coroutines.Dispatchers
 
-class GetUsdUseCase(
+class GetCurrencyUseCase(
     private val currencyRepository: CurrencyRepository
 ) : ResultUseCase<CurrencyRequestParam, CurrencyResponseModel>(
     backgroundContext = Dispatchers.IO,
