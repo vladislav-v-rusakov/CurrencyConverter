@@ -3,17 +3,16 @@ package com.vladus177.currencycheck.domain
 import com.vladus177.currencycheck.common.ResultUseCase
 import com.vladus177.currencycheck.data.repository.CurrencyRepository
 import com.vladus177.currencycheck.domain.model.CurrencyRequestParam
-import com.vladus177.currencycheck.domain.model.CurrencyResponseModel
+import com.vladus177.currencycheck.domain.model.RatesModel
 import kotlinx.coroutines.Dispatchers
 
 class GetCurrencyUseCase(
     private val currencyRepository: CurrencyRepository
-) : ResultUseCase<CurrencyRequestParam, CurrencyResponseModel>(
+) : ResultUseCase<CurrencyRequestParam, RatesModel>(
     backgroundContext = Dispatchers.IO,
     foregroundContext = Dispatchers.Main
 ) {
-    override suspend fun executeOnBackground(params: CurrencyRequestParam): CurrencyResponseModel? {
-        val remoteResults = currencyRepository.getRemoteCurrencyRates(params.currencyCode)
-        return remoteResults
+    override suspend fun executeOnBackground(params: CurrencyRequestParam): RatesModel? {
+        return currencyRepository.getRemoteCurrencyRates(params.currencyCode)
     }
 }

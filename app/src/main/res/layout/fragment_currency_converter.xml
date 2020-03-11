@@ -7,5 +7,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <com.vladus177.currencycheck.ui.view.CurrencyListView
+            android:id="@+id/currencies_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 </layout>

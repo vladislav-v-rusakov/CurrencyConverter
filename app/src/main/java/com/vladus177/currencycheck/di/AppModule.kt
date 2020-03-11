@@ -2,13 +2,15 @@ package com.vladus177.currencycheck.di
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.vladus177.currencycheck.URL_BASE_CURRENCY_API
+import com.vladus177.currencycheck.BuildConfig
+import com.vladus177.currencycheck.data.CurrencyDataMapper
 import com.vladus177.currencycheck.data.local.source.CurrencyLocalDataSource
 import com.vladus177.currencycheck.data.remote.net.CurrencyApi
 import com.vladus177.currencycheck.data.remote.source.CurrencyRemoteDataSource
 import com.vladus177.currencycheck.data.repository.CurrencyRepository
 import com.vladus177.currencycheck.domain.GetCurrencyUseCase
 import com.vladus177.currencycheck.presentation.CurrencyConverterViewModel
+import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -35,11 +37,14 @@ val appModule = module {
             .connectTimeout(1, TimeUnit.MINUTES)
             .readTimeout(1, TimeUnit.MINUTES)
             .writeTimeout(1, TimeUnit.MINUTES)
+            .retryOnConnectionFailure(true)
+            .connectionPool(ConnectionPool(0, 1, TimeUnit.NANOSECONDS))
+            .addInterceptor(login)
             .build()
     }
     single {
         Retrofit.Builder()
-            .baseUrl(URL_BASE_CURRENCY_API)
+            .baseUrl(BuildConfig.API_URL)
             .client(get())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -54,7 +59,7 @@ val appModule = module {
 
 
     // Repositories
-    factory { CurrencyRepository(get(), get()) }
+    factory { CurrencyRepository(get(), get(), get()) }
 
 
     // View models
@@ -63,6 +68,9 @@ val appModule = module {
 
     // UseCases
     factory { GetCurrencyUseCase(get()) }
+
+    // Mappers
+    factory {CurrencyDataMapper()}
 
 
 }

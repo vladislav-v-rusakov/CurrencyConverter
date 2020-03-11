@@ -6,5 +6,5 @@ import com.vladus177.currencycheck.data.DataConstant.RATES
 
 data class CurrencyResponseEntry(
     @SerializedName(BASE_CURRENCY) val baseCurrency: String?,
-    @SerializedName(RATES) val rates: Map<String, RatesEntry>?
+    @SerializedName(RATES) val rates: Map<String, Double>?
 )
