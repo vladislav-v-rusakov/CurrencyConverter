@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="loading"
+            type="Boolean" />
+
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,7 +19,13 @@
         <com.vladus177.currencycheck.ui.view.CurrencyListView
             android:id="@+id/currencies_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:visibility="@{loading ? View.GONE : View.VISIBLE}"/>
+
+        <include layout="@layout/view_loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{loading ? View.VISIBLE : View.GONE}"/>
 
     </LinearLayout>
 </layout>

@@ -7,19 +7,22 @@ import com.vladus177.currencycheck.presentation.model.Rates
 data class RatesModel(
     val currencyCode: String?,
     val currencyName: String?,
+    val currencyImageId: Int?,
     val rates: List<RatesItemModel>
 )
 
-fun RatesModel.fromDomainToUi() = Rates(
+fun RatesModel.fromDomainToUi(amount: Long) = Rates(
     currencyCode = currencyCode,
     currencyName = currencyName,
-    rates = rates.map { it.fromDomainToUi() }
+    currencyImageId = currencyImageId,
+    rates = rates.map { it.fromDomainToUi(amount) }
 
 )
 
-fun RatesItemModel.fromDomainToUi() = RateItem(
+fun RatesItemModel.fromDomainToUi(amount: Long) = RateItem(
     currencyCode = currencyCode,
     currencyName = currencyName,
     rate = rate,
-    currencyImageId = currencyImageId
+    currencyImageId = currencyImageId,
+    amount = amount
 )

@@ -4,5 +4,6 @@ data class RateItem(
     val currencyCode: String?,
     val currencyName: String?,
     val rate: Number?,
+    val amount: Long?,
     val currencyImageId: Int?
 )

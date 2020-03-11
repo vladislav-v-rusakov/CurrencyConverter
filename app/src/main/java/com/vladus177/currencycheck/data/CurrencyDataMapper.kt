@@ -11,6 +11,7 @@ class CurrencyDataMapper {
     fun CurrencyResponseEntry.fromDataToDomain() = RatesModel(
         currencyCode = baseCurrency,
         currencyName = getCurrencyNameFromCode(baseCurrency),
+        currencyImageId = getCurrencyDrawableFromCode(baseCurrency),
         rates = ratesEntryItemToRatesModelItem(rates)
     )
 

@@ -1,6 +1,7 @@
 package com.vladus177.currencycheck.ui.view
 
 import android.content.Context
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
@@ -20,18 +21,30 @@ class CurrencyListView @JvmOverloads constructor(
         binding = ViewCurrencyListBinding.inflate(
             LayoutInflater.from(context), this, true
         )
-        binding?.layoutId = DEFAULT_ITEM_ID
+        binding?.apply {
+            layoutId = DEFAULT_ITEM_ID
+            etCurrencyInput?.setText(DEFAULT_AMOUNT.toString())
+        }
     }
 
 
-    fun setData(rates: Rates, clickListener: OnListItemClickListener) {
+    fun setData(rates: Rates) {
         binding?.apply {
-            binding?.currencies = rates
+            layoutContainer.removeAllViews()
+            currencies = rates
             executePendingBindings()
+        }
+    }
+
+    fun setListeners(itemClickListener: OnListItemClickListener, textWatcher: TextWatcher) {
+        binding?.apply {
+            clickListener = itemClickListener
+            etCurrencyInput.addTextChangedListener(textWatcher)
         }
     }
 
     companion object {
         const val DEFAULT_ITEM_ID = R.layout.currency_list_item
+        const val DEFAULT_AMOUNT = 100
     }
 }

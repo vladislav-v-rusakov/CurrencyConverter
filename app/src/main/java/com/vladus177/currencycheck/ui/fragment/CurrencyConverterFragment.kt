@@ -1,6 +1,8 @@
 package com.vladus177.currencycheck.ui.fragment
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,11 +17,12 @@ import com.vladus177.currencycheck.ui.view.CurrencyListView
 import com.vladus177.currencycheck.ui.view.OnListItemClickListener
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CurrencyConverterFragment : Fragment(), OnListItemClickListener {
+class CurrencyConverterFragment : Fragment(), OnListItemClickListener, TextWatcher {
 
     private val viewModel: CurrencyConverterViewModel by viewModel()
     private lateinit var viewDataBinding: FragmentCurrencyConverterBinding
     private lateinit var listView: CurrencyListView
+    private var amount: Long = DEFAULT_AMOUNT
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,27 +36,45 @@ class CurrencyConverterFragment : Fragment(), OnListItemClickListener {
         super.onActivityCreated(savedInstanceState)
         viewDataBinding.lifecycleOwner = this
         listView = viewDataBinding.currenciesList
+        listView.setListeners(this, this)
         with(viewModel) { observe(currency, ::currencyObserver) }
-        viewModel.getCurrency("EUR")
+        viewModel.getCurrency(defaultCurrency)
     }
 
     private fun currencyObserver(result: Result<RatesModel>?) {
         when (result) {
             is Result.OnLoading -> {
+                viewDataBinding.loading = true
             }
             is Result.OnSuccess -> {
-                listView.setData(result.value.fromDomainToUi(), this)
+                viewDataBinding.loading = false
+                listView.setData(result.value.fromDomainToUi(amount))
             }
             is Result.OnError -> {
             }
             is Result.OnCancel -> {
             }
-            else -> {
-            }
         }
     }
 
-    override fun onClickItem(currencyCode: String) {
+    override fun onClickItem(currencyCode: String?) {
         viewModel.getCurrency(currencyCode)
+    }
+
+    override fun afterTextChanged(p0: Editable?) {
+        amount = p0.toString().toLong()
+    }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+    }
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+    }
+
+    companion object {
+        const val defaultCurrency: String = "EUR"
+        const val DEFAULT_AMOUNT: Long = 100
     }
 }

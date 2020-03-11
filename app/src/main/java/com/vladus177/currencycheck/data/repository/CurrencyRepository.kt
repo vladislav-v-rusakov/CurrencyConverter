@@ -14,7 +14,7 @@ class CurrencyRepository(
 
     }
 
-    suspend fun getRemoteCurrencyRates(currencyCode: String): RatesModel? {
+    suspend fun getRemoteCurrencyRates(currencyCode: String?): RatesModel? {
         val response = currencyRemoteDataSource.getCurrencyRates(currencyCode)
 
         return with(dataMapper) { response?.fromDataToDomain() }
