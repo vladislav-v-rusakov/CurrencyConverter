@@ -1,10 +1,7 @@
 package com.vladus177.currencycheck.common
 
 import com.vladus177.currencycheck.common.extensions.*
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 abstract class ResultUseCase<Q, T>(
@@ -30,6 +27,30 @@ abstract class ResultUseCase<Q, T>(
                     else -> liveData.postThrowable(throwable)
                 }
             }
+        }
+    }
+
+    override fun executeRepeating(liveData: LiveResult<T>, params: Q, repeatTime: Long) {
+        CoroutineScope(foregroundContext + newJob()).launch {
+
+            while (isActive) {
+                delay(repeatTime)
+                liveData.postLoading()
+
+                runCatching {
+                    withContext(backgroundContext) { executeOnBackground(params)!! }
+                }.onSuccess { response ->
+                    liveData.postSuccess(response)
+                }.onFailure { throwable ->
+                    when (throwable) {
+                        is CancellationException -> liveData.postCancel()
+                        is NullPointerException -> liveData.postEmpty()
+                        else -> liveData.postThrowable(throwable)
+                    }
+                }
+            }
+
+
         }
     }
 }

@@ -25,11 +25,13 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/ll_list_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingStart="@dimen/space_normal"
-            android:paddingEnd="@dimen/space_normal">
+            android:paddingEnd="@dimen/space_normal"
+            android:visibility="gone">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -39,12 +41,12 @@
 
                 <ImageView
                     android:id="@+id/iv_header_flag"
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
+                    android:layout_width="@dimen/flag_width"
+                    android:layout_height="@dimen/flag_height"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:scaleType="centerCrop"
                     android:background="@drawable/bg_rounded"
+                    android:scaleType="centerCrop"
                     android:src="@{currencies.currencyImageId, default=@drawable/ic_error_outline_black_24dp}"
                     tools:ignore="ContentDescription" />
 
@@ -81,9 +83,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:padding="@dimen/space_extra_xxsmall"
                     android:inputType="number"
-                    android:maxLength="7"
+                    android:maxLength="6"
+                    android:padding="@dimen/space_extra_xxsmall"
                     android:textColor="@color/colorBlack"
                     android:textSize="32sp"
                     tools:ignore="RelativeOverlap"

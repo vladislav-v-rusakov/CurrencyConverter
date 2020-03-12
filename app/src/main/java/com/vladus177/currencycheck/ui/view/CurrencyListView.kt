@@ -4,8 +4,10 @@ import android.content.Context
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.LinearLayout
 import com.vladus177.currencycheck.R
+import com.vladus177.currencycheck.common.extensions.toEditable
 import com.vladus177.currencycheck.databinding.ViewCurrencyListBinding
 import com.vladus177.currencycheck.presentation.model.Rates
 
@@ -23,15 +25,19 @@ class CurrencyListView @JvmOverloads constructor(
         )
         binding?.apply {
             layoutId = DEFAULT_ITEM_ID
-            etCurrencyInput?.setText(DEFAULT_AMOUNT.toString())
         }
     }
 
 
     fun setData(rates: Rates) {
         binding?.apply {
+            llListContainer.visibility = View.VISIBLE
             layoutContainer.removeAllViews()
             currencies = rates
+            if (etCurrencyInput.text.isEmpty()) {
+                etCurrencyInput.text = rates.amount?.toEditable()
+            }
+            etCurrencyInput.requestFocus()
             executePendingBindings()
         }
     }
@@ -45,6 +51,5 @@ class CurrencyListView @JvmOverloads constructor(
 
     companion object {
         const val DEFAULT_ITEM_ID = R.layout.currency_list_item
-        const val DEFAULT_AMOUNT = 100
     }
 }

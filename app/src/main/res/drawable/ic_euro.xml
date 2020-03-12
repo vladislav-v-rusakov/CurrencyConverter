@@ -1,0 +1,16 @@
+<vector android:height="40dp" android:viewportHeight="180"
+    android:viewportWidth="270" android:width="60dp" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#003399" android:pathData="M0,0h270v180h-270z"/>
+    <path android:fillColor="#FFEF52" android:pathData="M135,20l2.2,6.9l7.3,0l-5.9,4.3l2.2,6.9l-5.9,-4.3l-5.9,4.3l2.2,-6.9l-5.9,-4.3l7.3,0L135,20z"/>
+    <path android:fillColor="#FFEF52" android:pathData="M187,110l2.2,6.9l7.3,0l-5.9,4.3l2.2,6.9l-5.9,-4.3l-5.9,4.3l2.2,-6.9l-5.9,-4.3l7.3,0L187,110z"/>
+    <path android:fillColor="#FFEF52" android:pathData="M135,140l2.2,6.9l7.3,0l-5.9,4.3l2.2,6.9l-5.9,-4.3l-5.9,4.3l2.2,-6.9l-5.9,-4.3l7.3,0L135,140z"/>
+    <path android:fillColor="#FFEF52" android:pathData="M195,80l2.2,6.9l7.3,0l-5.9,4.3l2.2,6.9l-5.9,-4.3l-5.9,4.3l2.2,-6.9l-5.9,-4.3l7.3,0L195,80z"/>
+    <path android:fillColor="#FFEF52" android:pathData="M75,80l2.2,6.9l7.3,0l-5.9,4.3l2.2,6.9L75,93.8l-5.9,4.3l2.2,-6.9l-5.9,-4.3l7.3,0L75,80z"/>
+    <path android:fillColor="#FFEF52" android:pathData="M165,28l2.2,6.9l7.3,0l-5.9,4.3l2.2,6.9l-5.9,-4.3l-5.9,4.3l2.2,-6.9l-5.9,-4.3l7.3,0L165,28z"/>
+    <path android:fillColor="#FFEF52" android:pathData="M105,28l2.2,6.9l7.3,0l-5.9,4.3l2.2,6.9l-5.9,-4.3l-5.9,4.3l2.2,-6.9l-5.9,-4.3l7.3,0L105,28z"/>
+    <path android:fillColor="#FFEF52" android:pathData="M105,132l2.2,6.9l7.3,0l-5.9,4.3l2.2,6.9l-5.9,-4.3l-5.9,4.3l2.2,-6.9l-5.9,-4.3l7.3,0L105,132z"/>
+    <path android:fillColor="#FFEF52" android:pathData="M165,132l2.2,6.9l7.3,0l-5.9,4.3l2.2,6.9l-5.9,-4.3l-5.9,4.3l2.2,-6.9l-5.9,-4.3l7.3,0L165,132z"/>
+    <path android:fillColor="#FFEF52" android:pathData="M187,50l2.2,6.9l7.3,0l-5.9,4.3l2.2,6.9l-5.9,-4.3l-5.9,4.3l2.2,-6.9l-5.9,-4.3l7.3,0L187,50z"/>
+    <path android:fillColor="#FFEF52" android:pathData="M83,50l2.2,6.9l7.3,0l-5.9,4.3l2.2,6.9L83,63.8l-5.9,4.3l2.2,-6.9l-5.9,-4.3l7.3,0L83,50z"/>
+    <path android:fillColor="#FFEF52" android:pathData="M83,110l2.2,6.9l7.3,0l-5.9,4.3l2.2,6.9l-5.9,-4.3l-5.9,4.3l2.2,-6.9l-5.9,-4.3l7.3,0L83,110z"/>
+</vector>

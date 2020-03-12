@@ -15,6 +15,7 @@ fun RatesModel.fromDomainToUi(amount: Long) = Rates(
     currencyCode = currencyCode,
     currencyName = currencyName,
     currencyImageId = currencyImageId,
+    amount = amount.toString(),
     rates = rates.map { it.fromDomainToUi(amount) }
 
 )

@@ -23,12 +23,14 @@ class CurrencyConverterFragment : Fragment(), OnListItemClickListener, TextWatch
     private lateinit var viewDataBinding: FragmentCurrencyConverterBinding
     private lateinit var listView: CurrencyListView
     private var amount: Long = DEFAULT_AMOUNT
+    private var currency: String? = DEFAULT_CURRENCY
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         viewDataBinding = FragmentCurrencyConverterBinding.inflate(inflater, container, false)
+        viewDataBinding.loading = false
         return viewDataBinding.root
     }
 
@@ -38,43 +40,40 @@ class CurrencyConverterFragment : Fragment(), OnListItemClickListener, TextWatch
         listView = viewDataBinding.currenciesList
         listView.setListeners(this, this)
         with(viewModel) { observe(currency, ::currencyObserver) }
-        viewModel.getCurrency(defaultCurrency)
+        viewModel.getCurrency(currency, true)
     }
 
     private fun currencyObserver(result: Result<RatesModel>?) {
         when (result) {
-            is Result.OnLoading -> {
-                viewDataBinding.loading = true
-            }
+            is Result.OnLoading -> { }
             is Result.OnSuccess -> {
                 viewDataBinding.loading = false
                 listView.setData(result.value.fromDomainToUi(amount))
             }
-            is Result.OnError -> {
-            }
-            is Result.OnCancel -> {
-            }
+            is Result.OnError -> { }
+            is Result.OnCancel -> { }
         }
     }
 
     override fun onClickItem(currencyCode: String?) {
-        viewModel.getCurrency(currencyCode)
+        currency = currencyCode
+        viewModel.getCurrency(currency, true)
+        viewDataBinding.loading = true
     }
 
-    override fun afterTextChanged(p0: Editable?) {
-        amount = p0.toString().toLong()
+    override fun afterTextChanged(textInput: Editable?) {
+        if (textInput.isNullOrEmpty()) amount = DEFAULT_AMOUNT else {
+            amount = textInput.toString().toLong()
+            viewModel.getCurrency(currency, false)
+        }
     }
 
-    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-    }
-
-    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-    }
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
     companion object {
-        const val defaultCurrency: String = "EUR"
-        const val DEFAULT_AMOUNT: Long = 100
+        const val DEFAULT_CURRENCY: String = "EUR"
+        const val DEFAULT_AMOUNT: Long = 1
     }
 }

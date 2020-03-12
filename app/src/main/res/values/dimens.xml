@@ -23,4 +23,7 @@
     <dimen name="space_xxlarge">64dp</dimen>
     <dimen name="space_xxxlarge">98dp</dimen>
 
+    <dimen name="flag_width">50dp</dimen>
+    <dimen name="flag_height">40dp</dimen>
+
 </resources>

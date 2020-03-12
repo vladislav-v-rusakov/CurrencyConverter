@@ -13,6 +13,8 @@ abstract class BaseUseCase<Q, W : MutableLiveData<*>>(
 
     abstract fun execute(liveData: W, params: Q)
 
+    abstract fun executeRepeating(liveData: W, params: Q, repeatTime: Long)
+
     protected fun newJob(): Job {
         parentJob = parentJob.run {
             cancelChildren()

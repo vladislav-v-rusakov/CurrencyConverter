@@ -10,10 +10,19 @@ class CurrencyConverterViewModel(private val getCurrencyUseCase: GetCurrencyUseC
 
     val currency = LiveResult<RatesModel>()
 
-    fun getCurrency(code: String?) {
-        getCurrencyUseCase.execute(
-            liveData = currency,
-            params = CurrencyRequestParam(code)
-        )
+    fun getCurrency(code: String?, forceUpdate: Boolean) {
+        if (forceUpdate) {
+            getCurrencyUseCase.executeRepeating(
+                liveData = currency,
+                params = CurrencyRequestParam(code, forceUpdate),
+                repeatTime = 1000L
+            )
+        } else {
+            getCurrencyUseCase.execute(
+                liveData = currency,
+                params = CurrencyRequestParam(code, forceUpdate)
+            )
+        }
+
     }
 }

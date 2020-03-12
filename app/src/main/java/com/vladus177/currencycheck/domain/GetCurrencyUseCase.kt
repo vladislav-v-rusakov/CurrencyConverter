@@ -13,6 +13,6 @@ class GetCurrencyUseCase(
     foregroundContext = Dispatchers.Main
 ) {
     override suspend fun executeOnBackground(params: CurrencyRequestParam): RatesModel? {
-        return currencyRepository.getRemoteCurrencyRates(params.currencyCode)
+        return currencyRepository.getRemoteCurrencyRates(params.currencyCode, params.forceUpdate)
     }
 }

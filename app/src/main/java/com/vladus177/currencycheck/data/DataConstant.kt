@@ -32,6 +32,7 @@ object DataConstant {
     const val THB = "THB"
     const val USD = "USD"
     const val ZAR = "ZAR"
+    const val EUR = "EUR"
 
     const val BASE_CURRENCY = "baseCurrency"
     const val RATES = "rates"

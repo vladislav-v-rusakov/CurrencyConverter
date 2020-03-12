@@ -1,5 +1,6 @@
 package com.vladus177.currencycheck.common.extensions
 
+import android.text.Editable
 import com.vladus177.currencycheck.data.DataConstant.AUD
 import com.vladus177.currencycheck.data.DataConstant.BGN
 import com.vladus177.currencycheck.data.DataConstant.BRL
@@ -8,6 +9,7 @@ import com.vladus177.currencycheck.data.DataConstant.CHF
 import com.vladus177.currencycheck.data.DataConstant.CNY
 import com.vladus177.currencycheck.data.DataConstant.CZK
 import com.vladus177.currencycheck.data.DataConstant.DKK
+import com.vladus177.currencycheck.data.DataConstant.EUR
 import com.vladus177.currencycheck.data.DataConstant.GBP
 import com.vladus177.currencycheck.data.DataConstant.HKD
 import com.vladus177.currencycheck.data.DataConstant.HRK
@@ -65,7 +67,10 @@ fun getCurrencyNameFromCode(code: String?): String {
         THB -> "Baht"
         USD -> "US Dollar"
         ZAR -> "Rand"
+        EUR -> "Euro"
         else -> ""
     }
 }
+
+fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 

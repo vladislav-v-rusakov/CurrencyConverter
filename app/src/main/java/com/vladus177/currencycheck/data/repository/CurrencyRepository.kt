@@ -10,14 +10,32 @@ class CurrencyRepository(
     private val currencyRemoteDataSource: CurrencyRemoteDataSource,
     private val dataMapper: CurrencyDataMapper
 ) {
+
+    var cachedRates: RatesModel? = null
+
     suspend fun getLocalCurrencyRates(code: String) {
 
     }
 
-    suspend fun getRemoteCurrencyRates(currencyCode: String?): RatesModel? {
-        val response = currencyRemoteDataSource.getCurrencyRates(currencyCode)
+    suspend fun getRemoteCurrencyRates(currencyCode: String?, forceUpdate: Boolean): RatesModel? {
+        if (forceUpdate) {
+            val response = currencyRemoteDataSource.getCurrencyRates(currencyCode)
+            val rates = with(dataMapper) { response?.fromDataToDomain() }
+            saveRatesToCache(rates)
+            return rates
+        } else {
+            if (cachedRates == null) {
+                val response = currencyRemoteDataSource.getCurrencyRates(currencyCode)
+                val rates = with(dataMapper) { response?.fromDataToDomain() }
+                saveRatesToCache(rates)
+                return rates
+            } else {
+                return cachedRates
+            }
+        }
+    }
 
-        return with(dataMapper) { response?.fromDataToDomain() }
-
+    private fun saveRatesToCache(model: RatesModel?) {
+        cachedRates = model
     }
 }

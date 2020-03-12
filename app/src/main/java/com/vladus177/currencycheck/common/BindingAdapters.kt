@@ -11,7 +11,9 @@ import com.vladus177.currencycheck.BR
 import com.vladus177.currencycheck.presentation.model.RateItem
 import com.vladus177.currencycheck.ui.view.OnListItemClickListener
 import android.graphics.drawable.Drawable
-
+import android.widget.TextView
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 
 object BindingAdapters {
@@ -46,14 +48,27 @@ object BindingAdapters {
     @JvmStatic
     @BindingAdapter("android:src")
     fun setImageResource(imageView: ImageView, resource: Int) {
-        imageView.setClipToOutline(true)
+        imageView.clipToOutline = true
         imageView.setImageResource(resource)
     }
 
     @JvmStatic
     @BindingAdapter("android:src")
     fun setImageDrawable(view: ImageView, drawable: Drawable) {
-        view.setClipToOutline(true)
+        view.clipToOutline = true
         view.setImageDrawable(drawable)
+    }
+
+    @JvmStatic
+    @BindingAdapter("roundDecimals")
+    fun roundDecimals(view: TextView, value: Double) {
+        var result: String = "0.0"
+        runCatching {
+            result = BigDecimal(value).setScale(2, RoundingMode.HALF_EVEN).toString()
+        }.onSuccess {
+            view.text = result
+        }.onFailure {
+            view.text = result
+        }
     }
 }

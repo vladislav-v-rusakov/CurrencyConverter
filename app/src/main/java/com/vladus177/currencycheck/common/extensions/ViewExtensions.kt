@@ -36,6 +36,7 @@ fun getCurrencyDrawableFromCode(code: String?): Int {
         DataConstant.THB -> R.drawable.ic_thai
         DataConstant.USD -> R.drawable.ic_usa
         DataConstant.ZAR -> R.drawable.ic_central_africa
+        DataConstant.EUR -> R.drawable.ic_euro
         else -> 0
     }
 }
