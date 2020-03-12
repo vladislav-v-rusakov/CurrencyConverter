@@ -32,9 +32,11 @@ abstract class ResultUseCase<Q, T>(
 
     override fun executeRepeating(liveData: LiveResult<T>, params: Q, repeatTime: Long) {
         CoroutineScope(foregroundContext + newJob()).launch {
+            var firstCall = true
 
             while (isActive) {
-                delay(repeatTime)
+                delay(if (firstCall) 100L else 1000L)
+                firstCall = false
                 liveData.postLoading()
 
                 runCatching {
@@ -49,7 +51,6 @@ abstract class ResultUseCase<Q, T>(
                     }
                 }
             }
-
 
         }
     }

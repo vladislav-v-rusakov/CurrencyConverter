@@ -58,13 +58,12 @@ class CurrencyConverterFragment : Fragment(), OnListItemClickListener, TextWatch
     override fun onClickItem(currencyCode: String?) {
         currency = currencyCode
         viewModel.getCurrency(currency, true)
-        viewDataBinding.loading = true
     }
 
     override fun afterTextChanged(textInput: Editable?) {
         if (textInput.isNullOrEmpty()) amount = DEFAULT_AMOUNT else {
             amount = textInput.toString().toLong()
-            viewModel.getCurrency(currency, false)
+            viewModel.getCurrency(currency, true)
         }
     }
 

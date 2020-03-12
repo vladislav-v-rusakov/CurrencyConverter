@@ -70,7 +70,6 @@
             tools:ignore="RelativeOverlap"
             tools:text="100" />
 
-        <!--android:text="@{Double.toString(data.rate.doubleValue() * data.amount)}"-->
     </RelativeLayout>
 
 </layout>

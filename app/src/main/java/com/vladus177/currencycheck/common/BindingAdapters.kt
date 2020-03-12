@@ -14,6 +14,8 @@ import android.graphics.drawable.Drawable
 import android.widget.TextView
 import java.math.BigDecimal
 import java.math.RoundingMode
+import android.view.animation.AnimationUtils
+import com.vladus177.currencycheck.R
 
 
 object BindingAdapters {
@@ -38,6 +40,10 @@ object BindingAdapters {
                 binding.root.setOnClickListener {
                     if (entry is RateItem) {
                         clickListener.onClickItem(entry.currencyCode)
+                        val slideUp = AnimationUtils.loadAnimation(
+                            binding.root.context.applicationContext, R.anim.slide_up
+                        )
+                        binding.root.startAnimation(slideUp)
                     }
                 }
                 binding.setVariable(BR.data, entry)
